@@ -53,24 +53,6 @@ body {
   background-color: var(--color-bg);
 }
 
-header,
-main,
-footer {
-  padding: var(--space-lg);
-}
-
-header {
-  background-color: var(--color-surface);
-}
-
-footer {
-  background-color: var(--color-surface);
-}
-
-/* ===============================
-   3. Общие элементы интерфейса
-   =============================== */
-
 a {
   color: var(--color-primary);
 }
@@ -84,21 +66,46 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
+/* Подсветка элемента, к которому выполнен переход по якорю */
+:target {
+  outline: 2px dashed var(--color-primary);
+  outline-offset: 4px;
+}
+
+/* ===============================
+   3. Общие элементы интерфейса
+   =============================== */
+
+/* Блок button */
 .button {
   display: inline-block;
   padding: var(--space-sm) var(--space-md);
-  color: var(--color-white);
-  background-color: var(--color-primary);
-  text-decoration: none;
-  border: none;
+  border: 1px solid transparent;
   border-radius: var(--radius-sm);
   font: inherit;
+  text-decoration: none;
   cursor: pointer;
 }
 
-.button:hover {
+.button--primary {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}
+
+.button--primary:hover {
   color: var(--color-white);
   background-color: var(--color-primary-dark);
+}
+
+.button--secondary {
+  color: var(--color-primary);
+  background-color: transparent;
+  border-color: var(--color-primary);
+}
+
+.button--secondary:hover {
+  color: var(--color-white);
+  background-color: var(--color-primary);
 }
 
 .button:focus-visible {
@@ -106,27 +113,49 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
-.button:disabled {
+.button:disabled,
+.button--disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* Основная область страницы */
+.page {
+  padding: var(--space-lg);
+}
+
+/* Блок section — универсальный раздел страницы */
+.section {
+  max-width: var(--container-width);
+  margin: 0 auto var(--space-xl);
+}
+
+.section__title {
+  margin-top: 0;
 }
 
 /* ===============================
    4. Компоненты страницы
    =============================== */
 
-/* Шапка и навигация */
+/* Блок site-header */
 .site-header {
+  background-color: var(--color-surface);
+}
+
+.site-header__inner {
   max-width: var(--container-width);
   margin: 0 auto;
+  padding: var(--space-lg);
 }
 
-.site-logo {
-  font-weight: bold;
-  text-decoration: none;
+.site-header__logo {
+  font-weight: 700;
   color: var(--color-text);
+  text-decoration: none;
 }
 
+/* Блок site-nav */
 .site-nav__list {
   display: flex;
   flex-wrap: wrap;
@@ -138,7 +167,7 @@ a:focus-visible {
   list-style: none;
 }
 
-.site-nav__list a {
+.site-nav__link {
   display: inline-block;
   padding: var(--space-sm) var(--space-md);
   color: var(--color-primary);
@@ -146,12 +175,22 @@ a:focus-visible {
   border-radius: var(--radius-sm);
 }
 
-.site-nav__list a:hover {
+.site-nav__link:hover {
   color: var(--color-white);
   background-color: var(--color-primary);
 }
 
-/* Хлебные крошки */
+.site-nav__link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.site-nav__link--active {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}
+
+/* Блок breadcrumbs */
 .breadcrumbs {
   max-width: var(--container-width);
   margin: 0 auto var(--space-md);
@@ -159,22 +198,16 @@ a:focus-visible {
   color: var(--color-muted);
 }
 
-.breadcrumbs a {
+.breadcrumbs__link {
   color: var(--color-primary);
 }
 
-.breadcrumbs span::before {
+.breadcrumbs__current::before {
   content: " / ";
   color: var(--color-muted);
 }
 
-/* Подсветка элемента, к которому выполнен переход по якорю */
-:target {
-  outline: 2px dashed var(--color-primary);
-  outline-offset: 4px;
-}
-
-/* Hero-блок */
+/* Блок hero */
 .hero {
   max-width: var(--container-width);
   margin: 0 auto var(--space-xl);
@@ -183,29 +216,28 @@ a:focus-visible {
   border-radius: var(--radius-lg);
 }
 
-/* Секции */
-.section {
-  max-width: var(--container-width);
-  margin: 0 auto var(--space-xl);
-}
-
-.section h2 {
+.hero__title {
   margin-top: 0;
 }
 
-/* Сетка карточек товаров */
+/* Блок advantages */
+.advantages {
+  margin: 0;
+  padding-left: var(--space-lg);
+}
+
+/* Блок products-grid */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-lg);
 }
 
-/* Карточки товаров */
+/* Блок product-card */
 .product-card {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  margin-bottom: 0;
   padding: var(--space-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -216,9 +248,12 @@ a:focus-visible {
   border-color: var(--color-primary);
 }
 
-.product-card h3,
-.product-card p {
-  margin: 0;
+.product-card--featured {
+  border-color: var(--color-primary);
+}
+
+.product-card--discount {
+  border-color: var(--color-danger);
 }
 
 .product-card__image {
@@ -230,12 +265,31 @@ a:focus-visible {
   border-radius: var(--radius-sm);
 }
 
-.product-card .button {
+.product-card__title {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.product-card__description {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.product-card__price {
+  margin: 0;
+  font-weight: 700;
+}
+
+.product-card--discount .product-card__price {
+  color: var(--color-danger);
+}
+
+.product-card__button {
   margin-top: auto;
   align-self: flex-start;
 }
 
-/* Страница каталога: фильтры + товары */
+/* Блок catalog-layout: фильтры + товары */
 .catalog-layout {
   max-width: var(--container-width);
   margin: 0 auto var(--space-xl);
@@ -245,6 +299,7 @@ a:focus-visible {
   gap: var(--space-lg);
 }
 
+/* Блок catalog-filters */
 .catalog-filters {
   grid-area: filters;
   align-self: start;
@@ -254,38 +309,42 @@ a:focus-visible {
   background-color: var(--color-surface);
 }
 
-.catalog-filters h2,
-.catalog-products h2 {
+.catalog-filters__title {
   margin-top: 0;
 }
 
+/* Блок catalog-products */
 .catalog-products {
   grid-area: products;
 }
 
-/* Форма фильтров */
+.catalog-products__title {
+  margin-top: 0;
+}
+
+/* Блок filters-form */
 .filters-form {
   display: grid;
   gap: var(--space-md);
 }
 
-.filters-form fieldset {
+.filters-form__group {
   margin: 0;
   padding: var(--space-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
 }
 
-.filters-form legend {
+.filters-form__legend {
   font-weight: 700;
 }
 
-.filters-form label {
+.filters-form__label {
   display: block;
   margin-bottom: var(--space-sm);
 }
 
-.filters-form input[type="number"] {
+.filters-form__input {
   width: 100%;
   padding: 8px 10px;
   margin-bottom: var(--space-sm);
@@ -294,12 +353,22 @@ a:focus-visible {
   font: inherit;
 }
 
-.filters-form .button {
+.filters-form__input:hover {
+  border-color: var(--color-primary);
+}
+
+.filters-form__input:focus-visible,
+.filters-form__checkbox:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.filters-form__button {
   justify-self: start;
 }
 
-/* Боковой блок */
-.aside-info {
+/* Блок info-box — дополнительный информационный блок */
+.info-box {
   max-width: var(--container-width);
   margin: 0 auto var(--space-xl);
   padding: var(--space-md);
@@ -307,10 +376,43 @@ a:focus-visible {
   background-color: var(--color-surface);
 }
 
+.info-box__title {
+  margin-top: 0;
+}
+
+.info-box__text {
+  margin-bottom: 0;
+}
+
+/* Блок contacts */
+.contacts {
+  padding-left: var(--space-lg);
+}
+
+.contacts__item {
+  margin-bottom: var(--space-xs);
+}
+
+/* Блок site-footer */
+.site-footer {
+  background-color: var(--color-surface);
+}
+
+.site-footer__inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: var(--space-lg);
+}
+
+.site-footer__text {
+  margin: 0 0 var(--space-xs);
+}
+
 /* ===============================
    5. Форма и модальное окно
    =============================== */
 
+/* Блок order-dialog */
 .order-dialog {
   width: min(100% - 32px, 560px);
   padding: var(--space-lg);
@@ -322,18 +424,29 @@ a:focus-visible {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.form-field {
+.order-dialog__title {
+  margin-top: 0;
+}
+
+/* Блок order-form */
+.order-form__field {
   margin-bottom: var(--space-md);
 }
 
-.form-field label {
+.order-form__label {
   display: block;
   margin-bottom: var(--space-xs);
 }
 
-.form-field input,
-.form-field select,
-.form-field textarea {
+.order-form__label--inline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.order-form__input,
+.order-form__select,
+.order-form__textarea {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid var(--color-border);
@@ -341,47 +454,44 @@ a:focus-visible {
   font: inherit;
 }
 
-.form-field input[type="checkbox"] {
-  width: auto;
+.order-form__input:hover,
+.order-form__select:hover,
+.order-form__textarea:hover {
+  border-color: var(--color-primary);
 }
 
-.form-field small {
+.order-form__input:focus-visible,
+.order-form__select:focus-visible,
+.order-form__textarea:focus-visible,
+.order-form__checkbox:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* Поля с ошибками: aria-invalid выставляется в js/main.js */
+.order-form__input[aria-invalid="true"],
+.order-form__select[aria-invalid="true"],
+.order-form__textarea[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+.order-form__checkbox[aria-invalid="true"] {
+  outline: 2px solid var(--color-danger);
+}
+
+.order-form__hint {
   display: block;
   margin-top: var(--space-xs);
   color: var(--color-muted);
 }
 
-/* Состояния полей формы */
-.form-field input:hover,
-.form-field select:hover,
-.form-field textarea:hover {
-  border-color: var(--color-primary);
-}
-
-.form-field input:focus-visible,
-.form-field select:focus-visible,
-.form-field textarea:focus-visible,
-.form-actions button:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 3px;
-}
-
-[aria-invalid="true"] {
-  border-color: var(--color-danger);
-}
-
-.form-actions {
+.order-form__actions {
   display: flex;
   gap: var(--space-md);
   margin-top: var(--space-lg);
 }
 
-.form-actions button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Сообщение об успешной отправке */
+/* Блок success-message */
 .success-message {
   max-width: var(--container-width);
   margin: var(--space-lg) auto;
