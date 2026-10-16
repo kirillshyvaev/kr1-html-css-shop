@@ -16,6 +16,8 @@
         <ul class="site-nav__list">
           <li class="site-nav__item"><a class="site-nav__link" href="index.html">Главная</a></li>
           <li class="site-nav__item"><a class="site-nav__link site-nav__link--active" href="catalog.html" aria-current="page">Каталог</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="product.html">Карточка товара</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="order.html">Заявка</a></li>
           <li class="site-nav__item"><a class="site-nav__link" href="contacts.html">Контакты</a></li>
           <li class="site-nav__item"><a class="site-nav__link" href="index.html#advantages">Преимущества</a></li>
           <li class="site-nav__item"><a class="site-nav__link" href="index.html#popular">Популярные товары</a></li>
@@ -82,27 +84,30 @@
 
         <div class="products-grid">
           <article class="product-card product-card--featured">
-            <img class="product-card__image" src="images/ball.jpg" alt="Мяч" width="300" height="300" loading="lazy">
+            <span class="product-card__badge">Хит</span>
+            <img class="product-card__image" src="images/ball.jpg" alt="Футбольный мяч" width="300" height="300" loading="lazy">
             <h3 class="product-card__title">Мяч</h3>
             <p class="product-card__description">Футбольный мяч для тренировок и игр во дворе.</p>
             <p class="product-card__price">Цена: 1000 руб.</p>
-            <a class="button button--primary product-card__button" href="index.html#popular">Подробнее</a>
+            <a class="button button--primary product-card__button" href="product.html">Подробнее</a>
           </article>
 
-          <article class="product-card">
-            <img class="product-card__image" src="images/buritto.jpeg" alt="Буррито" width="300" height="300" loading="lazy">
+          <article class="product-card product-card--new">
+            <span class="product-card__badge">Новинка</span>
+            <img class="product-card__image" src="images/buritto.jpeg" alt="Буррито с овощами" width="300" height="300" loading="lazy">
             <h3 class="product-card__title">Буритто</h3>
             <p class="product-card__description">Сытный буррито с курицей, овощами и соусом.</p>
             <p class="product-card__price">Цена: 1500 руб.</p>
-            <a class="button button--primary product-card__button" href="index.html#popular">Подробнее</a>
+            <a class="button button--primary product-card__button" href="product.html">Подробнее</a>
           </article>
 
           <article class="product-card product-card--discount">
-            <img class="product-card__image" src="images/forma.jpg" alt="Форма" width="300" height="300" loading="lazy">
+            <span class="product-card__badge">Скидка</span>
+            <img class="product-card__image" src="images/forma.jpg" alt="Спортивная форма" width="300" height="300" loading="lazy">
             <h3 class="product-card__title">Форма</h3>
             <p class="product-card__description">Спортивная форма: футболка и шорты.</p>
             <p class="product-card__price">Цена: 2000 руб.</p>
-            <a class="button button--primary product-card__button" href="index.html#popular">Подробнее</a>
+            <a class="button button--primary product-card__button" href="product.html">Подробнее</a>
           </article>
         </div>
       </section>
@@ -115,5 +120,7 @@
       <p class="site-footer__text">Дисциплина: Фронтенд и бэкенд разработка</p>
     </div>
   </footer>
+
+  <a class="to-top" href="#" aria-label="Вернуться наверх страницы">Наверх</a>
 </body>
 </html>
